@@ -49,7 +49,6 @@ public class Main {
                         Collectors.counting()))
                 .entrySet().stream().max(Comparator.comparing(Map.Entry::getValue)).stream()
                 .collect(Collectors.toList());
-
         System.out.println(element);
 
         //3.Listoni librat te cilet kan ngel pa shitur
