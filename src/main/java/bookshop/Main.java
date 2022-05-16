@@ -4,6 +4,7 @@ import bookshop.exceptions.BookNotFoundExceptions;
 import bookshop.model.Book;
 import bookshop.model.BookShop;
 import bookshop.model.Customer;
+import bookshop.model.Genre;
 import bookshop.service.BookShopService;
 import bookshop.service.BookShopServiceImpl;
 
@@ -56,7 +57,7 @@ public class Main {
         bookShopService.showInventory();
 
         //4. Find book by genre
-        //System.out.println(bookShopService.findBookByGenre(Genre.NonFiction));
+        System.out.println(bookShopService.findBookByGenre(Genre.NonFiction));
 
         //5. Find book by year
         //System.out.println(bookShopService.findBookByYear(2016));
