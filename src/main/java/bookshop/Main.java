@@ -53,7 +53,7 @@ public class Main {
 
 
         //3.Listoni librat te cilet kan ngel pa shitur
-        //bookShopService.showInventory();
+        bookShopService.showInventory();
 
         //4. Find book by genre
         //System.out.println(bookShopService.findBookByGenre(Genre.NonFiction));
