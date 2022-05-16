@@ -1,14 +1,12 @@
 package bookshop;
 
 import bookshop.exceptions.BookNotFoundExceptions;
-import bookshop.model.Book;
-import bookshop.model.BookShop;
-import bookshop.model.Customer;
-import bookshop.model.Genre;
+import bookshop.model.*;
 import bookshop.service.BookShopService;
 import bookshop.service.BookShopServiceImpl;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -41,12 +39,12 @@ public class Main {
 
 
         //1.customer qe kane shpenzuar me shume
-        bookShopService.customerQeKaShpenzuarMeShume();
+        //bookShopService.customerQeKaShpenzuarMeShume();
 
         //2.Listoni librat me te shitur
         List<Map.Entry<Book, Long>> element = bookShop.getOrders().stream()
-                .map(order -> order.getBookList())
-                .flatMap(books -> books.stream()).collect(Collectors.groupingBy(Function.identity(),
+                .map(Order::getBookList)
+                .flatMap(Collection::stream).collect(Collectors.groupingBy(Function.identity(),
                         Collectors.counting()))
                 .entrySet().stream().max(Comparator.comparing(Map.Entry::getValue)).stream()
                 .collect(Collectors.toList());
@@ -54,10 +52,10 @@ public class Main {
 
 
         //3.Listoni librat te cilet kan ngel pa shitur
-        bookShopService.showInventory();
+      //  bookShopService.showInventory();
 
         //4. Find book by genre
-        System.out.println(bookShopService.findBookByGenre(Genre.NonFiction));
+        //System.out.println(bookShopService.findBookByGenre(Genre.NonFiction));
 
         //5. Find book by year
         //System.out.println(bookShopService.findBookByYear(2016));
