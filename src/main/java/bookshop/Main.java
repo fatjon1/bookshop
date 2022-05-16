@@ -1,12 +1,18 @@
 package bookshop;
 
 import bookshop.exceptions.BookNotFoundExceptions;
+import bookshop.model.Book;
 import bookshop.model.BookShop;
 import bookshop.model.Customer;
 import bookshop.service.BookShopService;
 import bookshop.service.BookShopServiceImpl;
 
 import java.io.IOException;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException, BookNotFoundExceptions {
@@ -37,27 +43,14 @@ public class Main {
         bookShopService.customerQeKaShpenzuarMeShume();
 
         //2.Listoni librat me te shitur
-//        for (Order order : bookShop.getOrders()
-//        ) {
-//            Map<Integer, Long> frequencyMap = new HashMap<>();
-//            for (Book book : order.getBookList()) {
-//
-//
-//                    frequencyMap.merge(book.getId(), 1L, Long::sum);
-//
-//                //frequencyMap.compute(book.getId(), (key, val) -> val + entry.getValue());
-//
-//
-////            for (Map.Entry<Integer, Long> entry : frequencyMap.entrySet()) {
-////                System.out.println(entry.getKey() + ": " + entry.getValue());
-////            }
-////                Map<Book, Long> counted = order.getBookList().stream()
-////                        .collect(Collectors.groupingByConcurrent(Function.identity(), Collectors.counting()));
-////                System.out.println(counted);
-//                System.out.println(frequencyMap);
-//
-//            }
-//        }
+        List<Map.Entry<Book, Long>> element = bookShop.getOrders().stream()
+                .map(order -> order.getBookList())
+                .flatMap(books -> books.stream()).collect(Collectors.groupingBy(Function.identity(),
+                        Collectors.counting()))
+                .entrySet().stream().max(Comparator.comparing(Map.Entry::getValue)).stream()
+                .collect(Collectors.toList());
+
+        System.out.println(element);
 
         //3.Listoni librat te cilet kan ngel pa shitur
         //bookShopService.showInventory();
